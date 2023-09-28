@@ -1,0 +1,53 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: Device
+metadata:
+  name: jaka-zu7-instance
+  namespace: default
+  labels:
+    description: jaka-zu7-instance
+    model: jaka-model
+spec:
+  deviceModelRef:
+    name: jaka-model
+  protocol:
+    customizedProtocol:
+      protocolName: jaka-protocol
+      configData:
+        redisHost: nuc.hua-juan.top
+        redisPort: "6379"
+        redisPassword: "5iwrnpFC4BRqADn6qCFV"
+    common:
+      customizedValues:
+        redisHost: nuc.hua-juan.top
+        redisPort: "6379"
+        redisPassword: "5iwrnpFC4BRqADn6qCFV"
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: ""
+            operator: In
+            values:
+              - nuc-zhw
+  propertyVisitors:
+    - propertyName: status
+      customizedProtocol:
+        protocolName: jaka-protocol
+        configData:
+          propertyName: status
+    - propertyName: curStep
+      customizedProtocol:
+        protocolName: jaka-protocol
+        configData:
+          propertyName: curStep
+status:
+  twins:
+    - propertyName: status
+      reported:
+        metadata:
+          type: string
+        value: "UNKNOWN"
+    - propertyName: curStep
+      reported:
+        metadata:
+          type: string
+        value: "UNKNOWN"

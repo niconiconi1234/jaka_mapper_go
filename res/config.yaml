@@ -1,0 +1,14 @@
+mqtt:
+  server: mqtt://nuc.hua-juan.top:1883
+  servername: nuc.hua-juan.top
+  username: ""
+  password: ""
+  clientId: ""
+  certification: ""
+  privatekey: ""
+  caCert: ""
+http:
+  certification: ""
+  privatekey: ""
+  caCert: ""
+configmap: /opt/kubeedge/deviceProfile.json

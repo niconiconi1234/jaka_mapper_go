@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaka-mapper-go-zhw
+spec:
+  selector:
+    matchLabels:
+      app: jaka-mapper-go-zhw
+  template:
+    metadata:
+      labels:
+        app: jaka-mapper-go-zhw
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: jaka-mapper-go-zhw
+        image: huajuan6848/jaka_mapper_go:0.0.1
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/kubeedge
+      nodeSelector:
+        kubernetes.io/hostname: nuc-zhw
+      volumes:
+      - name: config-volume
+        configMap:
+          name: device-profile-config-nuc-zhw
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaka-mapper-go-zhw
+spec:
+  type: NodePort
+  selector:
+    app: jaka-mapper-go-zhw
+  ports:
+  - nodePort: 31216
+    port: 1215
+    targetPort: 1215
